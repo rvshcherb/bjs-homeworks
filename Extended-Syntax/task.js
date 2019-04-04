@@ -1,4 +1,6 @@
 
+"use strict";
+
 
 function calculateQuadraticEquation(){
     let a = +window.a.value;
@@ -11,8 +13,22 @@ function calculateQuadraticEquation(){
 }
 
 function getResult(a,b,c){
-    // код для задачи №1 писать здесь
-    //return x;
+
+    let discriminant = Math.pow(b,2) - 4 * a * c;
+    console.log(discriminant);
+    if (discriminant < 0) {
+        console.log("Нет корней");  
+    } else if (discriminant === 0) {
+        let x = -b / 2 * a;
+        console.log (x);
+        return x;
+    } else {
+        let x = [];
+        x.push((-b + Math.sqrt(discriminant)) / (2 * a));
+        x.push((-b - Math.sqrt(discriminant)) / (2 * a));
+        console.log (x);
+        return x;
+    }
 }
 
 function calculateDrinkTask(){
@@ -23,9 +39,26 @@ function calculateDrinkTask(){
 }
 
 function askDrink(name,dateOfBirthday){
-    // код для задачи №2 писать здесь
-    //console.log(result)
-    //return result;
+    let today_date = new Date();
+
+    let today_year = today_date.getFullYear();
+    let today_month = today_date.getMonth();
+    let today_day = today_date.getDate();
+
+    let birthday_year = dateOfBirthday.getFullYear();
+    let birthday_month = dateOfBirthday.getMonth();
+    let birthday_day = dateOfBirthday.getDate();
+    
+    let age = today_year - birthday_year;
+
+    if ((birthday_month > today_month) || ((birthday_month == today_month) && (birthday_day > today_day))) {
+        age--;
+    }
+    
+    console.log(age);
+    
+    let greeting = (age < 18) ? `Сожалею, ${name}, но я не могу вам продать алкоголь. Зато могу предложить вам замечательный клюквенный компот!` : `Не желаете ли олд-фэшн, ${name}?`; 
+    return greeting;
 }
 
 function calculateAverageRating(){
@@ -35,6 +68,18 @@ function calculateAverageRating(){
 }
 
 function getAverageMark(marks){
-    // код для задачи №3 писать здесь
-    //return averageMark;
+
+    if (marks.length > 5) {
+        console.log("массив слишком длинный");
+        marks = marks.slice(0,5);
+    }
+
+    let summ = 0;
+    for (let i = 0; i < marks.length; i++) {
+        summ = summ + marks[i];
+    } 
+
+    let averageMark = summ / marks.length;
+    console.log(`Средняя оценка: ${averageMark}`);
+    return averageMark;
 }
