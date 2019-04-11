@@ -1,3 +1,5 @@
+"use strict"
+
 function calculateMortgage() {
     let percent = window.percent.value;
     let contribution = window.contribution.value;
@@ -9,11 +11,25 @@ function calculateMortgage() {
     span.textContent = result;
 }
 
-function calculateTotalMortgage(percent, contribution, amount, date) {
+"use strict"
 
-    // код для задачи №1 писать здесь
-    //return totalAmount;
+function calculateTotalMortgage(percent, contribution, amount, date) {
+    
+    let todayDate = new Date();
+    let loanDate = new Date(date);
+    let duration = Math.floor((loanDate - todayDate) / (1000 * 3600 * 24 * 365 / 12));
+      
+    let actualPercent = percent / 100;
+    let loan = amount - contribution;
+    let monthlyPercentage = actualPercent / 12;
+    let monthlyPayment = amount * (monthlyPercentage + monthlyPercentage/(Math.pow((1 + monthlyPercentage),24) - 1));
+    let total = monthlyPayment * 24;
+    
+    console.log(total.toFixed(2));
+    return total.toFixed(2);
 }
+
+
 
 function sayHello() {
     let name = window.personName.value;
