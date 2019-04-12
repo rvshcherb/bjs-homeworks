@@ -35,28 +35,15 @@ showSolutionsMessage(1,-6,9);
 showSolutionsMessage(1,-4,-5);
 
 // Задача №2
+function chooseName(value) {
+  return (value === 0) ? 'Эмилио' : 'Родриго';  
+}
+
 function getPersonalData(secretData) {
-  function chooseFirstName() {
-    if(secretData.aaa === 0) {
-      return 'Эмилио';
-    } else {
-      return 'Родриго';
-    }
+  return {
+    firstName: chooseName(secretData.aaa),
+    lastName: chooseName(secretData.bbb)
   }
-
-  function chooseLastName() {
-    if(secretData.bbb === 0) {
-      return 'Эмилио';
-    } else {
-      return 'Родриго';
-    }
-  }
-
-  let name = {
-    firstName: chooseFirstName(),
-    lastName: chooseLastName()
-  }
-  return name;
 }
 
 console.log(getPersonalData({aaa: 0, bbb:0}));
@@ -65,31 +52,24 @@ console.log(getPersonalData({aaa: 1, bbb:0}));
 console.log(getPersonalData({aaa: 1, bbb:1}));
 
 //Задача №3
+function averageSubject(array){
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i];
+  }
+  return sum / array.length;
+}
+
 function getAverageScore(data) {
+  let averageData = {};
+  let n = 0, sum = 0 ;
   for (let prop in data) {
-    data[prop] = averageSubject();
-
-    function averageSubject(){
-      let sum = 0;
-      for (let i = 0; i < data[prop].length; i++) {
-        sum += data[prop][i];
-      }
-      return sum / data[prop].length;;
-    }
+    averageData[prop] = averageSubject(data[prop]);
+    sum += averageData[prop];
+    n++;
   }
-
-  data.average = averageTotal();
-
-  function averageTotal() {
-    let quant = 0;
-    let sum = 0;
-    for (let prop in data) {
-      sum += data[prop];
-      quant++;
-    }
-    return sum / quant;
-  }
-  return data;
+  averageData.average = sum / n;
+  return averageData;
 }
 
 console.log(getAverageScore({
