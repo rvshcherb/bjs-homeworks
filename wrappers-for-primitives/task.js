@@ -11,19 +11,27 @@ function calculateMortgage() {
     span.textContent = result;
 }
 
-"use strict"
+
+function validate(smth) {
+ return Number(smth) ? smth : console.log(`Значение ${smth} не корректно`);
+}
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
     
     let todayDate = new Date();
     let loanDate = new Date(date);
-    let duration = Math.floor((loanDate - todayDate) / (1000 * 3600 * 24 * 365 / 12));
+    let duration = validateDate();
+
+    function validateDate(){
+      let value = Math.floor((loanDate - todayDate) / (1000 * 3600 * 24 * 365 / 12));
+      return (value > 0) ? value : console.log('Недопустимая дата');
+    } 
       
-    let actualPercent = percent / 100;
-    let loan = amount - contribution;
+    let actualPercent = validate(percent) / 100;
+    let loan = validate(amount) - validate(contribution);
     let monthlyPercentage = actualPercent / 12;
     let monthlyPayment = loan * (monthlyPercentage + monthlyPercentage/(Math.pow((1 + monthlyPercentage),24) - 1));
-    let total = monthlyPayment * 24;
+    let total = monthlyPayment * duration;
     
     console.log(total.toFixed(2));
     return total.toFixed(2);
@@ -39,6 +47,7 @@ function sayHello() {
 }
 
 function getGreeting(name) {
-    // код для задачи №2 писать здесь
-    //return greeting;
+  let greetings =  (name) ? `${name}` : 'Аноним';
+  console.log(`Привет Мир! Меня зовут ${greetings}`);
+  return `Привет Мир! Меня зовут ${greetings}`;
 }
