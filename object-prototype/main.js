@@ -7,7 +7,12 @@ function initCheckBirthday() {
 }
 
 function checkBirthday(birthday) {
-    // код для задачи №1 писать здесь
+  let now = Date.now();
+  let dateOfBirth = new Date(birthday);
+  let diff = now - +dateOfBirth;
+  let age = diff / (((365 * 24 * 60 * 60 * 1000)*3 + (366 * 24 * 60 * 60 * 1000)) / 4);
+
+  return (age > 18);
 }
 
 function initPrintAnimalSound() {
@@ -21,7 +26,8 @@ function initPrintAnimalSound() {
 }
 
 function getAnimalSound(animal) {
-    // код для задачи №2 писать здесь
+  let sound = animal.sound;
+  return (sound) ? `${sound}` : null; 
 }
 
 function initCalculateStatement() {
@@ -35,5 +41,12 @@ function initCalculateStatement() {
 }
 
 function getAverageMark(marks) {
-    // код для задачи №3 писать здесь
+  let summ = 0;
+  for (let i = 0; i < marks.length; i++) {
+    summ += Number(marks[i]);
+  }
+  let average = summ / marks.length;
+  let roundedAverage = Math.round(average);
+
+  return roundedAverage;
 }
