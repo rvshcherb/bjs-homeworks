@@ -128,7 +128,7 @@ class StudentLog {
     this.name = name;
     this.algebra = [];
     this.geometry = [];
-    this.chemistry = []
+    this.chemistry = [];
   }
 
   getName() {
@@ -143,7 +143,7 @@ class StudentLog {
           this[prop].push(grade);
           return this[prop].length;
         } else {
-          console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
+          console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`);
           return this[prop].length;
         }
       } 
@@ -155,7 +155,7 @@ class StudentLog {
       if (prop == subject) {
         let sum = 0;
         for (let i = 0; i < this[prop].length; i++) {
-          sum += this[prop][i]
+          sum += this[prop][i];
         }
         return sum / this[prop].length;
       }
@@ -171,7 +171,7 @@ class StudentLog {
       if (typeof(this[prop]) == 'object') {
         length += this[prop].length;
         for (let i = 0; i < this[prop].length; i++) {
-          sum += this[prop][i]
+          sum += this[prop][i];
         } 
       }
     }
