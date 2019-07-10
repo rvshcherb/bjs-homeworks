@@ -3,7 +3,7 @@ function sum(a,b) {
 }
 
 function compareArrays(arr1, arr2) {
- return arr1.every((element, index) => element === arr2[index]);
+  return arr1.length === arr2.length ? arr1.every((element, index) => element === arr2[index]) : false; 
 }
 
 function memoize(fn, limit) {
@@ -11,18 +11,21 @@ function memoize(fn, limit) {
 
   return function(...args) {
     const compareResult = results.find(element => compareArrays(element.args, args));
+
     if (compareResult != undefined) {
-      //console.log('args already exist');
+      console.log('args already exist');
       return compareResult.result;
-    } else {
-      const functionResult = fn.apply(null, args);
-      results.push({args: args, result: functionResult});
-      if (results.length > limit) {
-        results.shift();
-      }
-      //console.log(results);
-      return functionResult;
-    }  
+    }
+    
+    const functionResult = fn.apply(null, args);
+    results.push({args: args, result: functionResult});
+    
+    if (results.length > limit) {
+      results.shift();
+    }
+
+    console.log(results);
+    return functionResult;
   }
 }
 
@@ -36,3 +39,4 @@ foo(10, 50);
 foo(10, 60);
 foo(10, 40);
 foo(10, 70);
+
