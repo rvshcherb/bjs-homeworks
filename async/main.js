@@ -1,29 +1,26 @@
-const goodMorning = () => console.log('Доброе утро!');
-const goodNight = () => console.log('Доброй ночи!');
-
 function setDailyRhythm(wakeUpTime, bedTime) {
-  let currentTime = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-  
+  let currentTime;
+  setInterval(() => currentTime = new Date().toTimeString().replace(/.*(\d{2}:\d{2}):\d{2}.*/, "$1"), 1000);
+
   function setAlarm(time, callback) {
-    console.log(`Этот будильник заведен на ${time}`);
+    //console.log(`будильник заведен на ${time}`);
 
-    return (currentTime) => {
-      console.log(`Текущее время: ${currentTime}`);
-
-      // Тут условие проверки для вызова callback-функциию
-
+    return function (currentTime) {
+      //console.log(`Текущее время: ${currentTime}`);
+      if (currentTime === time) {
+        callback();
+      }
     }
   }
 
-const morningAlarm = setAlarm(wakeUpTime, goodMorning);
-const eveningAlarm = setAlarm(bedTime, goodNight);
+  const goodMorning = () => alert('Доброе утро!');
+  const goodNight = () => alert('Доброй ночи!');
 
-//morningAlarm(currentTime);
-//eveningAlarm(currentTime);
+  const morningAlarm = setAlarm(wakeUpTime, goodMorning);
+  const eveningAlarm = setAlarm(bedTime, goodNight);
 
-setInterval(morningAlarm, 1000, currentTime);
-setInterval(eveningAlarm, 1000, currentTime);
+  setInterval(() => morningAlarm(currentTime), 1000);
+  setInterval(() => eveningAlarm(currentTime), 1000);
 }
 
-setDailyRhythm('09:00', '23:00'); 
-
+setDailyRhythm('09:00', '00:20');
